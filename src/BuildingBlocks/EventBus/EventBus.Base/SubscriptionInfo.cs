@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EventBus.Base;
+﻿namespace EventBus.Base;
 
 /// <summary>
 /// Dışarıdan gönderilen verilerin içeride tutulması için kullanıcaz
@@ -22,13 +16,4 @@ public class SubscriptionInfo
         return new SubscriptionInfo(handlerType);
     }
 
-}
-
-class Deneme
-{
-    public void Denemeeee()
-    {
-        
-
-    }
 }

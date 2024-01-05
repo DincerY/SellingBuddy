@@ -3,17 +3,17 @@
 namespace EventBus.Base.Events;
 
 
-public class IntegraionEvent
+public class IntegrationEvent
 {
     
     [JsonConstructor]
-    public IntegraionEvent(Guid id, DateTime createdDate)
+    public IntegrationEvent(Guid id, DateTime createdDate)
     {
         Id = id;
         CreatedDate = createdDate;
     }
         
-    public IntegraionEvent()
+    public IntegrationEvent()
     {
         Id = Guid.NewGuid();
         CreatedDate = DateTime.Now;
