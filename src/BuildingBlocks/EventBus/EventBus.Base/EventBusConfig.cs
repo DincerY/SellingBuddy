@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace EventBus.Base;
+
 
 public class EventBusConfig
 {
@@ -15,6 +11,8 @@ public class EventBusConfig
     public string EventNamePrefix { get; set; } = String.Empty;
     public string EventNameSuffix { get; set; } = String.Empty;
     public EventBusType EventBusType { get; set; } = EventBusType.RabbitMQ;
+    //object olmasının sebebi diğer servislerde bu class ı uygulayacağı zaman bağımlı kütüğhaneler
+    //onlar içinde yüklenmiş olacak.
     public object Connection { get; set; }
 
     public bool DeleteEventPrefix => !String.IsNullOrEmpty(EventNamePrefix);
