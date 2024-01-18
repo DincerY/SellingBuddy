@@ -41,7 +41,7 @@ public abstract class BaseEventBus : IEventBus
         SubsManager.Clear();
     }
 
-    //event oluşması halinde tetiklenecek method.Bir event dinlenirken bir olay meydana gelirse burası çalışacak
+    //event oluşması halinde tetiklenecek method. Bir event dinlenirken bir olay meydana gelirse burası çalışacak
     public async Task<bool> ProcessEvent(string eventName,string message)
     {
         //kırpa işlemi

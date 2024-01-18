@@ -51,7 +51,8 @@ public class EventBusServiceBus : BaseEventBus
         var message = new Message()
         {
             MessageId = Guid.NewGuid().ToString(),
-            Body = null,
+            Body = bodyArr,
+            //Filter mantığını uygulayıp bu işlemi diğerilerinden ayırdık
             Label = eventName
         };
         topicClient.SendAsync(message).GetAwaiter().GetResult();
@@ -106,7 +107,10 @@ public class EventBusServiceBus : BaseEventBus
                     await subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
                 }
             },
-            new MessageHandlerOptions(ExceptionReceivedHandler){MaxConcurrentCalls = 10,AutoComplete = false});
+            new MessageHandlerOptions(ExceptionReceivedHandler)
+            {
+                MaxConcurrentCalls = 10,AutoComplete = false
+            });
     }
 
     private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
