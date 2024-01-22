@@ -59,7 +59,7 @@ public class RabbitMQPersistentConnection : IDisposable
                 connection.ConnectionShutdown += Connection_ConnectionShutDown;
                 connection.CallbackException += Connection_CallbackException;
                 connection.ConnectionBlocked += Connection_ConnectionBlocked;
-
+         
                 //TODO log
                 return true;
             }

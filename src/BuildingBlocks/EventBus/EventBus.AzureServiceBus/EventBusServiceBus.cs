@@ -146,7 +146,7 @@ public class EventBusServiceBus : BaseEventBus
         bool ruleExist;
         try
         {
-            var rule = managementClient.GetRuleAsync(EventBusConfig.DefaultTopicName, eventName, eventName).GetAwaiter()
+            var rule = managementClient.GetRuleAsync(EventBusConfig.DefaultTopicName, GetSubName(eventName), eventName).GetAwaiter()
                 .GetResult();
             ruleExist = rule != null; 
         }
