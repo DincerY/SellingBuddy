@@ -158,7 +158,7 @@ public class EventBusServiceBus : BaseEventBus
 
         if (!ruleExist)
         {
-            subscriptionClient.AddRuleAsync(new RuleDescription(
+            subscriptionClient.AddRuleAsync(new RuleDescription
             {
                 Filter = new CorrelationFilter() { Label = eventName },
                 Name = eventName

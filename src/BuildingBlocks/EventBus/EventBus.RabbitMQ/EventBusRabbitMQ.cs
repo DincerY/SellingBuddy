@@ -19,14 +19,21 @@ public class EventBusRabbitMQ : BaseEventBus
     {
         if (config.Connection != null)
         {
-            var connJson = JsonConvert.SerializeObject(EventBusConfig.Connection, new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
+            //var connJson = JsonConvert.SerializeObject(EventBusConfig.Connection, new JsonSerializerSettings()
+            //{
+            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+               
+            //});
 
-            connectionFactory = JsonConvert.DeserializeObject<ConnectionFactory>(connJson);
+            //connectionFactory = JsonConvert.DeserializeObject<ConnectionFactory>(connJson);
+
+            connectionFactory = new ConnectionFactory()
+            {
+                Uri = new Uri(config.Connection.ToString())
+            };
 
         }
+        //Eğer bir connection girilmezse bu kısım çalışacak
         else
         {
             connectionFactory = new ConnectionFactory();
@@ -61,6 +68,10 @@ public class EventBusRabbitMQ : BaseEventBus
         eventName = ProcessEventName(eventName);
 
         consumerChannel.ExchangeDeclare(exchange:EventBusConfig.DefaultTopicName,type:"direct");
+
+        consumerChannel.QueueBind(queue: GetSubName(eventName),
+            exchange: EventBusConfig.DefaultTopicName,
+            routingKey: eventName);
 
         var message = JsonConvert.SerializeObject(@event);
         var body = Encoding.UTF8.GetBytes(message);
