@@ -11,7 +11,7 @@ public class EventBusConfig
     public string EventNamePrefix { get; set; } = String.Empty;
     public string EventNameSuffix { get; set; } = String.Empty;
     public EventBusType EventBusType { get; set; } = EventBusType.RabbitMQ;
-    //object olmasının sebebi diğer servislerde bu class ı uygulayacağı zaman bağımlı kütüğhaneler
+    //object olmasının sebebi diğer servislerde bu class ı uygulayacağı zaman bağımlı kütüphaneler
     //onlar içinde yüklenmiş olacak.
     public object Connection { get; set; }
 

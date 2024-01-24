@@ -69,9 +69,6 @@ public class EventBusRabbitMQ : BaseEventBus
 
         consumerChannel.ExchangeDeclare(exchange:EventBusConfig.DefaultTopicName,type:"direct");
 
-        consumerChannel.QueueBind(queue: GetSubName(eventName),
-            exchange: EventBusConfig.DefaultTopicName,
-            routingKey: eventName);
 
         var message = JsonConvert.SerializeObject(@event);
         var body = Encoding.UTF8.GetBytes(message);
@@ -81,11 +78,15 @@ public class EventBusRabbitMQ : BaseEventBus
             var properties = consumerChannel.CreateBasicProperties();
             properties.DeliveryMode = 2; //Persistent
 
-            consumerChannel.QueueDeclare(queue: GetSubName(eventName),
-                durable: true,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
+            //consumerChannel.QueueDeclare(queue: GetSubName(eventName),
+            //    durable: true,
+            //    exclusive: false,
+            //    autoDelete: false,
+            //    arguments: null);
+
+            //consumerChannel.QueueBind(queue: GetSubName(eventName),
+            //    exchange: EventBusConfig.DefaultTopicName,
+            //    routingKey: eventName);
 
             consumerChannel.BasicPublish(
                 exchange: EventBusConfig.DefaultTopicName,

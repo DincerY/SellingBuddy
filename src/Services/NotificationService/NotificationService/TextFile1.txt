@@ -1,0 +1,4 @@
+﻿Event klasörü altında önceden oluşturulmuş iki classı tekrardan yazdık ortan bir yerden ikisini beraber 
+kullanmadık bunun sebebi bu servisleri birininden bağımsız iki farklı makinede ve farklı teknolojilerle
+yazılmış bir servis olarak düşündüğümüzden. Bizim için aynı solution altınlarmış gibi görünsede aslında 
+bunları farklı makinelerde ayağa kaldırıp aynı burda yapılan işlerimizi yapabiliriz.

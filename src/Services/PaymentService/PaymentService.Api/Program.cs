@@ -15,7 +15,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddLogging(configure => configure.AddConsole());
+builder.Services.AddLogging(configure =>
+{
+    configure.AddConsole();
+    configure.AddDebug();
+});
 builder.Services.AddTransient<OrderStartedIntegrationEventHandler>();
 builder.Services.AddSingleton<IEventBus>(sp =>
 {
@@ -25,7 +29,7 @@ builder.Services.AddSingleton<IEventBus>(sp =>
         EventNameSuffix = "IntegrationEvent",
         SubscriberClientAppName = "PaymentService",
         EventBusType = EventBusType.RabbitMQ,
-        Connection = ""
+        Connection = "amqps://gkryqocz:IGyMgVG6q6mTjNgJgUbvVoCrsujU5tpz@whale.rmq.cloudamqp.com/gkryqocz"
     };
     return EventBusFactory.Create(config, sp);
 });
