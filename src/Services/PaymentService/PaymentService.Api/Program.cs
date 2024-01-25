@@ -29,7 +29,6 @@ builder.Services.AddSingleton<IEventBus>(sp =>
         EventNameSuffix = "IntegrationEvent",
         SubscriberClientAppName = "PaymentService",
         EventBusType = EventBusType.RabbitMQ,
-        Connection = "amqps://gkryqocz:IGyMgVG6q6mTjNgJgUbvVoCrsujU5tpz@whale.rmq.cloudamqp.com/gkryqocz"
     };
     return EventBusFactory.Create(config, sp);
 });

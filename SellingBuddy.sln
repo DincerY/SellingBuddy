@@ -78,6 +78,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "consul", "consul", "{8F61C4
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "redis", "redis", "{52268A41-EC72-4D8E-A94E-E66990F935B6}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlserver", "sqlserver", "{137942E3-3E07-4FE5-AFF7-374C16B1E7AD}"
 EndProject

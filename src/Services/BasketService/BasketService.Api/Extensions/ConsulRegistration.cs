@@ -1,10 +1,6 @@
 ﻿using Consul;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Server.IISIntegration;
 
-namespace CatalogService.Api.Extensions;
+namespace BasketService.Api.Extensions;
 
 public static class ConsulRegistration
 {
@@ -19,8 +15,6 @@ public static class ConsulRegistration
         return services;
     }
 
-
-
     public static IApplicationBuilder RegisterWithConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime)
     {
         var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
@@ -34,21 +28,21 @@ public static class ConsulRegistration
         //var features = app.Properties["server.Features"] as FeatureCollection;
         ////.NET içinde, çalışan uygulamanın hangi address te olduğunu bu şekilde öğrenebiliyoruz 
         //var addresses = features.Get<IServerAddressesFeature>().Addresses;
-     
-        //var address = addresses.First();
-        
 
-        var address = "http://localhost:5004";
+        //var address = addresses.First();
+
+
+        var address = "http://localhost:5003";
 
         //Register service with consul
         var uri = new Uri(address);
         var registration = new AgentServiceRegistration()
         {
-            ID = $"CatalogService",
-            Name = "CatalogService",
+            ID = $"BasketService",
+            Name = "BasketService",
             Address = $"{uri.Host}",
             Port = uri.Port,
-            Tags = new []{"CatalogService", "Catalog"}
+            Tags = new[] { "BasketService" , "Basket" }
         };
 
         logger.LogInformation("Registering with consul");
@@ -63,4 +57,5 @@ public static class ConsulRegistration
 
         return app;
     }
+
 }

@@ -23,6 +23,17 @@ namespace CatalogService.Api.Controllers
         }
 
         [HttpGet]
+        [Route("getfakeitem/{id}")]
+        public async Task<IActionResult> GetFakeCatalog(int id)
+        {
+            return Ok($"Get Catalog With Id :{id}");
+        }
+
+
+
+
+
+        [HttpGet]
         [Route("items")]
         //Bı kısımı aslında swagger tarafı için yaptık
         [ProducesResponseType(typeof(PaginatedItemsViewModel<CatalogItem>), (int)HttpStatusCode.OK)]
