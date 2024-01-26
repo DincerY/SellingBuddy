@@ -11,5 +11,11 @@ public class IdentityService : IIdentityService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public string GetUserName() => _httpContextAccessor.HttpContext.User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
+    public string GetUserName() => "DincerYigit";
+    public string GetUserName(int a) => _httpContextAccessor.HttpContext.User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
+    public string GetUserName(string a) => _httpContextAccessor.HttpContext.User.Claims
+        .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
 }

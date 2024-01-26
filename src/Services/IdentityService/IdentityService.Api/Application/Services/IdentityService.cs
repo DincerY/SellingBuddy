@@ -16,12 +16,12 @@ public class IdentityService : IIdentityService
             new Claim(ClaimTypes.Name, "Dincer Yigit"),
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TechBuddySecretKeyShouldBeVeryLong"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Thisismyverylongsecretkeyitistrue"));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var expiry = DateTime.Now.AddDays(10);
+        var expiry = DateTime.UtcNow.AddDays(10);
 
-        var token = new JwtSecurityToken(claims: claim, expires: expiry, signingCredentials: creds,
-            notBefore: DateTime.Now);
+        var token = new JwtSecurityToken(claims: claim,expires: expiry, signingCredentials: creds,
+            notBefore: DateTime.UtcNow);
 
         var encodedJwt = new JwtSecurityTokenHandler().WriteToken(token);
 

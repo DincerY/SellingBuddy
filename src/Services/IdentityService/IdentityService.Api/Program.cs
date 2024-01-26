@@ -12,7 +12,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureConsul(builder.Configuration);
 
-builder.Services.AddScoped<IIdentityService, IdentityService.Api.Application.Services.IdentityService>();
+//builder.Services.AddScoped<IIdentityService, IdentityService.Api.Application.Services.IdentityService>();
+builder.Services.AddSingleton<IIdentityService, IdentityService.Api.Application.Services.IdentityService>();
 
 
 var app = builder.Build();

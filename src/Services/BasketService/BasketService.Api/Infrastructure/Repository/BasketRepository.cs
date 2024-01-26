@@ -27,7 +27,7 @@ public class RedisBasketRepository : IBasketRepository
             return null;
         }
 
-        return JsonConvert.DeserializeObject<CustomerBasket>(customerId);
+        return JsonConvert.DeserializeObject<CustomerBasket>(data);
     }
 
     public IEnumerable<string> GetUsers()

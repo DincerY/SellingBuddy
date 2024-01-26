@@ -1,18 +1,17 @@
-﻿using System.Net;
-using BasketService.Api.Core.Application.Repository;
+﻿using BasketService.Api.Core.Application.Repository;
 using BasketService.Api.Core.Application.Services;
 using BasketService.Api.Core.Domain.Models;
 using BasketService.Api.IntegrationEvents.Events;
 using EventBus.Base.Abstraction;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace BasketService.Api.Controllers;
 
+//[Authorize]
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+
 public class BasketController : ControllerBase
 {
     private readonly IBasketRepository repository;
@@ -78,8 +77,7 @@ public class BasketController : ControllerBase
     [Route("checkout")]
     [ProducesResponseType((int)HttpStatusCode.Accepted)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<ActionResult> CheckoutAsync([FromBody] BasketCheckout basketCheckout,
-        [FromHeader(Name = "x-request-id")] string requestId)
+    public async Task<ActionResult> CheckoutAsync([FromBody] BasketCheckout basketCheckout)
     {
         var userId = basketCheckout.Buyer;
 
