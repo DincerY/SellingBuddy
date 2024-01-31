@@ -1,4 +1,6 @@
-﻿using OrderService.Domain.SeedWork;
+﻿using OrderService.Domain.AggregateModels.BuyerAggregate;
+using OrderService.Domain.Events;
+using OrderService.Domain.SeedWork;
 
 namespace OrderService.Domain.AggregateModels.OrderAggregate;
 
@@ -20,12 +22,11 @@ public class Order : BaseEntity, IAggregateRoot
 
     public Order()
     {
-        BuyerId = buyerId;
         Id = Guid.NewGuid();
         _orderItems = new List<OrderItem>();
     }
 
-    public Order(string userName, string cardHolderName, Address address, int cardTypeId, string cardNumber, string cardSecurityNumber, DateTime cardExpiration, Guid? paymentMethodId, Guid? buyerId = null) : this()
+    public Order(string userName, Address address, int cardTypeId, string cardNumber, string cardSecurityNumber, string cardHolderName,  DateTime cardExpiration, Guid? paymentMethodId, Guid? buyerId = null) : this()
     {
         BuyerId = buyerId;
         Address = address;
@@ -34,5 +35,28 @@ public class Order : BaseEntity, IAggregateRoot
         OrderDate = DateTime.UtcNow;
 
         AddOrderStartedDomainEvent(userName, cardTypeId, cardNumber, cardSecurityNumber, cardHolderName, cardExpiration);
+    }
+
+    private void AddOrderStartedDomainEvent(string userName, int cardTypeId, string cardNumber, string cardSecurityNumber, string cardHolderName, DateTime cardExpiration)
+    {
+        var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userName, cardTypeId, cardNumber, cardSecurityNumber, cardHolderName, cardExpiration);
+
+        this.AddDomainEvent(orderStartedDomainEvent);
+    }
+
+    public void AddOrderItem(int productId, string productName, decimal unitPrice, string pictureUrl, int units = 1)
+    {
+        var orderItem = new OrderItem(productId, productName, unitPrice, pictureUrl, units);
+        _orderItems.Add(orderItem);
+    }
+
+    public void SetBuyerId(Guid buyerId)
+    {
+        BuyerId = buyerId;
+    }
+
+    public void SetPaymentMethodId(Guid paymentMethodId)
+    {
+        PaymentMethodId = paymentMethodId;
     }
 }

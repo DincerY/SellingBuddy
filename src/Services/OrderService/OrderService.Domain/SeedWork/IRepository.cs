@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderService.Domain.SeedWork;
 
-public interface IRespository
+public interface IRepository<T>
 {
     IUnitOfWork UnitOfWork { get; }
 }

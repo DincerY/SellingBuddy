@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using OrderService.Domain.AggregateModels.BuyerAggregate;
 
 namespace OrderService.Domain.Events;
 
 public class BuyerAndPaymentMethodVerifiedDomainEvent : INotification
 {
-    public BuyerAndPaymentMethodVerifiedDomainEvent(Guid orderId, Buyer buyer, PaymentMethod payment)
+    public BuyerAndPaymentMethodVerifiedDomainEvent(Buyer buyer, PaymentMethod payment, Guid orderId)
     {
         OrderId = orderId;
         Buyer = buyer;

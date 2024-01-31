@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using OrderService.Domain.AggregateModels.OrderAggregate;
 
 namespace OrderService.Domain.Events;
 
@@ -18,13 +19,14 @@ public class OrderStartedDomainEvent : INotification
     public Order Order { get; }
 
     public OrderStartedDomainEvent(
+        Order order,
         string userName,
         int cardTypeId,
         string cardNumber,
         string cardSecurityNumber,
         string cardHolderName,
-        DateTime cardExpiration,
-        Order order)
+        DateTime cardExpiration)
+
     {
         UserName = userName;
         CardTypeId = cardTypeId;
